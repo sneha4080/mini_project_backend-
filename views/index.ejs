@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsApp</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <h3>All chats!</h3>
+    <form method="get" action="/chats/new">
+      <button>New chat</button>
+    </form>
+    <% for(let chat of chats){ %>
+    <div class="chat">
+      <p>From : <b><%= chat.from %></b></p>
+
+      <div class="message" style="background-color: dodgerblue; color: white">
+        <p><%= chat.msg %></p>
+
+        <form method="get" action="/chats/<%= chat._id %>/edit">
+          <button>Edit</button>
+        </form>
+        <br />
+        <form method="post" action="/chats/<%= chat._id %>?_method=DELETE">
+          <button>Delete</button>
+        </form>
+
+        <form method="get" action="/chats/<%= chat._id %>">
+          <button>Show</button>
+        </form>
+
+      </div>
+      <p>Recevied By : <i><%= chat.to%></i></p>
+      <hr />
+      <p><%= chat.created_at.toString().split(" ")[4] %></p>
+      <p><%= chat.created_at.toString().split(" ").slice(0,4).join(" ") %></p>
+
+      <!-- what diffre b/w ><%=  %> & <%  %> -->
+      <!-- <%= %> is used when a variable valuse needs to be printed there -->
+      <!-- But <%  %> this is used for if blocks and while, for loops -->
+
+      <!-- not only for loop all constional statements will come like for loop, while loop, if-else blocks... -->
+    </div>
+    <br />
+    <br />
+    <% } %>
+  </body>
+</html>
